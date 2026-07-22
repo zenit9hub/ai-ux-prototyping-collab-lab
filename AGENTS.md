@@ -9,6 +9,8 @@
 - 직전 단계의 accepted baseline은 원본으로 보존한다. 수정이 필요하면 변경 요청(`CR-###`)을 기록하고, 영향을 받는 하위 단계를 알린다.
 - Hi-Fi 기준 원본은 `05. Hi-Fi Design (Figma Make, Claude Design)`의 canonical manifest다. `06`에는 복사본을 만들지 않는다.
 
+- 07. 배포·검증 (GitHub Pages)의 site는 검증용 정적 source다. 실제 운영 데이터·비밀값·실장비 제어 API를 추가하지 않는다.
+
 ## 2. 시작 전 확인
 
 1. 루트 `README.md`와 현재 단계의 `README.md`를 읽는다.
@@ -68,3 +70,4 @@ ai_contribution: 도구·프롬프트 버전·사람 검토 범위
 - 작업 브랜치는 `work/<case-id>/<NN>-<stage-name>`을 사용한다.
 - Pull Request에는 입력 baseline, 변경 목적, 사실/가정/결정/미확정, 다음 단계 영향, AI 사용 범위, 품질 게이트 결과를 적는다.
 - 자동 검증은 구조·링크·메타데이터 같은 기계적 조건만 다룬다. UX 품질·사업 적합성·정책 승인은 사람이 담당한다.
+- 07의 배포 URL에서 발견한 차이는 직접 상위 기준을 바꾸지 말고 Issue 또는 CR로 기록한다.

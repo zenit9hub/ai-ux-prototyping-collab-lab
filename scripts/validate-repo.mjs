@@ -17,12 +17,21 @@ const expectedFiles = [
   ".github/ISSUE_TEMPLATE/decision.md",
   ".github/ISSUE_TEMPLATE/change-request.md",
   ".github/workflows/validate-stage.yml",
+  ".github/workflows/deploy-github-pages.yml",
   "00. 운영·공통 기준/00. 통합 R&R 및 전체 작업 흐름.md",
   "00. 운영·공통 기준/01. 하네스 엔지니어링 운영 규칙.md",
   "00. 운영·공통 기준/02. 산출물 계약·품질 게이트.md",
   "00. 운영·공통 기준/03. AI 협업·변경 관리 규칙.md",
   "00. 운영·공통 기준/04. 강의 기준자료와 현업 전환 안내.md",
   "00. 운영·공통 기준/visual/00. AI Native Workflow Map.html",
+  "07. 배포·검증 (GitHub Pages)/README.md",
+  "07. 배포·검증 (GitHub Pages)/__폴더 운영 원칙.md",
+  "07. 배포·검증 (GitHub Pages)/site/index.html",
+  "07. 배포·검증 (GitHub Pages)/site/.nojekyll",
+  "07. 배포·검증 (GitHub Pages)/site/assets/css/styles.css",
+  "07. 배포·검증 (GitHub Pages)/site/assets/js/data.js",
+  "07. 배포·검증 (GitHub Pages)/site/assets/js/app.js",
+  "scripts/validate-deploy-site.mjs",
 ];
 
 const stages = [
@@ -32,6 +41,7 @@ const stages = [
   ["04", "04. Wireframe"],
   ["05", "05. Hi-Fi Design (Figma Make, Claude Design)"],
   ["06", "06. 개발 전달·퍼블리싱"],
+  ["07", "07. 배포·검증 (GitHub Pages)"],
 ];
 
 const canonicalMetadata = [
