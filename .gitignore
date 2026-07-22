@@ -1,0 +1,19 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local secrets and generated runtime files
+.env
+.env.*
+!.env.example
+node_modules/
+coverage/
+*.log
+
+# Large design-source files: use a canonical manifest and approved asset delivery instead.
+*.fig
+*.sketch
+*.psd
+*.ai

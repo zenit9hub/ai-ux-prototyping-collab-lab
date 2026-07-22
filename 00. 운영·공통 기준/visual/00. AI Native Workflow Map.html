@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="AI Agent UI/UX Prototyping 공동 실습 저장소의 역할, 하네스, 단계별 인수인계 흐름을 한 화면으로 보여 주는 안내 지도"
+    />
+    <title>AI Native UI/UX Prototyping Workflow Map</title>
+    <style>
+      :root {
+        --ink: #17213a;
+        --muted: #64748b;
+        --canvas: #f5f7fb;
+        --surface: #ffffff;
+        --line: #dce3ef;
+        --navy: #183c7a;
+        --blue: #2367d1;
+        --sky: #5ca9f5;
+        --mint: #36b798;
+        --amber: #e9a23b;
+        --lavender: #7e72d8;
+        --rose: #db6878;
+        --shadow: 0 14px 38px rgba(27, 54, 104, 0.11);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 0 0, rgba(91, 169, 245, 0.17), transparent 27rem),
+          radial-gradient(circle at 100% 18%, rgba(126, 114, 216, 0.12), transparent 24rem),
+          var(--canvas);
+        font-family:
+          Pretendard,
+          "Apple SD Gothic Neo",
+          "Noto Sans KR",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        line-height: 1.55;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        width: min(1240px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 52px 0 72px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 0 14px;
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        width: 8px;
+        height: 8px;
+        border-radius: 99px;
+        background: var(--mint);
+        content: "";
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
+        gap: 28px;
+        align-items: end;
+        padding: 38px 40px;
+        overflow: hidden;
+        color: white;
+        border-radius: 26px;
+        background:
+          radial-gradient(circle at 91% 14%, rgba(123, 193, 255, 0.55), transparent 11rem),
+          radial-gradient(circle at 79% 106%, rgba(100, 226, 189, 0.3), transparent 18rem),
+          linear-gradient(126deg, #102b61 0%, #183c7a 47%, #235bc0 100%);
+        box-shadow: var(--shadow);
+      }
+
+      .hero .eyebrow {
+        color: #a9d4ff;
+      }
+
+      .hero .eyebrow::before {
+        background: #a6f2d5;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 800px;
+        margin-bottom: 16px;
+        font-size: clamp(31px, 4.1vw, 53px);
+        line-height: 1.16;
+        letter-spacing: -0.05em;
+      }
+
+      .hero p {
+        max-width: 650px;
+        margin-bottom: 0;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 16px;
+      }
+
+      .hero-route {
+        display: grid;
+        gap: 10px;
+        align-self: stretch;
+        padding: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 18px;
+        background: rgba(7, 27, 68, 0.28);
+        backdrop-filter: blur(9px);
+      }
+
+      .hero-route span {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #e8f1ff;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .hero-route span:not(:last-child)::after {
+        width: 1px;
+        height: 12px;
+        margin-left: 7px;
+        background: rgba(255, 255, 255, 0.38);
+        content: "";
+      }
+
+      .hero-route strong {
+        display: grid;
+        width: 27px;
+        height: 27px;
+        place-items: center;
+        color: #183c7a;
+        border-radius: 9px;
+        background: #dff4ff;
+        font-size: 12px;
+      }
+
+      .intro {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin: 28px 0 44px;
+      }
+
+      .intro-card {
+        min-height: 146px;
+        padding: 21px 22px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.82);
+      }
+
+      .intro-card b {
+        display: block;
+        margin-bottom: 7px;
+        color: var(--blue);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+      }
+
+      .intro-card h2 {
+        margin-bottom: 6px;
+        font-size: 18px;
+        letter-spacing: -0.03em;
+      }
+
+      .intro-card p {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 16px;
+        margin: 0 0 19px;
+      }
+
+      .section-head h2 {
+        margin-bottom: 0;
+        font-size: 25px;
+        letter-spacing: -0.045em;
+      }
+
+      .section-head p {
+        max-width: 470px;
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 14px;
+        text-align: right;
+      }
+
+      .workflow-wrap {
+        display: grid;
+        grid-template-columns: 236px minmax(0, 1fr);
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      .control-card {
+        position: relative;
+        display: flex;
+        min-height: 432px;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 25px;
+        overflow: hidden;
+        color: white;
+        border-radius: 22px;
+        background: linear-gradient(155deg, #284b94, #122951);
+        box-shadow: var(--shadow);
+      }
+
+      .control-card::after {
+        position: absolute;
+        right: -42px;
+        bottom: -42px;
+        width: 168px;
+        height: 168px;
+        border: 24px solid rgba(150, 213, 255, 0.16);
+        border-radius: 50%;
+        content: "";
+      }
+
+      .control-card small {
+        color: #afd1ff;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.11em;
+      }
+
+      .control-card h3 {
+        margin: 8px 0 13px;
+        font-size: 25px;
+        line-height: 1.2;
+        letter-spacing: -0.04em;
+      }
+
+      .control-card p {
+        position: relative;
+        z-index: 1;
+        color: rgba(255, 255, 255, 0.76);
+        font-size: 14px;
+      }
+
+      .control-list {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 9px;
+        margin: 15px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .control-list li {
+        padding: 9px 10px;
+        border: 1px solid rgba(255, 255, 255, 0.17);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.06);
+        font-size: 12px;
+      }
+
+      .control-card .open-link {
+        position: relative;
+        z-index: 1;
+        width: max-content;
+        padding-bottom: 2px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.54);
+        color: white;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .stages {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .stage {
+        position: relative;
+        display: flex;
+        min-height: 209px;
+        flex-direction: column;
+        padding: 19px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--surface);
+        box-shadow: 0 7px 17px rgba(28, 55, 96, 0.05);
+        transition: transform 160ms ease, box-shadow 160ms ease;
+      }
+
+      .stage:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 28px rgba(28, 55, 96, 0.13);
+      }
+
+      .stage::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: var(--accent);
+        content: "";
+      }
+
+      .stage .num {
+        color: var(--accent);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.09em;
+      }
+
+      .stage h3 {
+        margin: 6px 0 8px;
+        font-size: 18px;
+        line-height: 1.27;
+        letter-spacing: -0.035em;
+      }
+
+      .stage p {
+        margin-bottom: 13px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .stage .handoff {
+        margin-top: auto;
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .stage .handoff span {
+        color: var(--accent);
+      }
+
+      .research {
+        --accent: #37a98d;
+      }
+
+      .prd {
+        --accent: #e29b33;
+      }
+
+      .ia {
+        --accent: #7666d4;
+      }
+
+      .wireframe {
+        --accent: #2674ce;
+      }
+
+      .hifi {
+        --accent: #df6c7e;
+      }
+
+      .handoff-stage {
+        --accent: #208bba;
+      }
+
+      .caption {
+        margin: 14px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .caption strong {
+        color: var(--ink);
+      }
+
+      .harness {
+        display: grid;
+        grid-template-columns: 1fr 1.16fr;
+        gap: 18px;
+        margin-top: 46px;
+      }
+
+      .harness-copy,
+      .harness-loop {
+        padding: 27px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: var(--surface);
+      }
+
+      .harness-copy h2 {
+        margin-bottom: 10px;
+        font-size: 24px;
+        letter-spacing: -0.04em;
+      }
+
+      .harness-copy p {
+        margin-bottom: 17px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .harness-copy ul {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .harness-copy li {
+        display: flex;
+        gap: 10px;
+        align-items: start;
+        padding: 9px 0;
+        border-top: 1px solid #edf0f5;
+        font-size: 14px;
+      }
+
+      .harness-copy li:first-child {
+        border-top: 0;
+      }
+
+      .harness-copy li b {
+        min-width: 88px;
+        color: var(--blue);
+      }
+
+      .loop-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 8px;
+        align-items: center;
+        height: 100%;
+      }
+
+      .loop-step {
+        position: relative;
+        min-height: 148px;
+        padding: 16px 12px;
+        border-radius: 16px;
+        background: var(--soft);
+      }
+
+      .loop-step:not(:last-child)::after {
+        position: absolute;
+        top: 50%;
+        right: -12px;
+        z-index: 1;
+        width: 16px;
+        color: var(--blue);
+        content: "→";
+        font-size: 20px;
+        font-weight: 800;
+        text-align: center;
+      }
+
+      .loop-step b {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--accent);
+        font-size: 12px;
+      }
+
+      .loop-step span {
+        display: block;
+        font-size: 13px;
+        font-weight: 800;
+        line-height: 1.3;
+        letter-spacing: -0.02em;
+      }
+
+      .loop-step small {
+        display: block;
+        margin-top: 7px;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.35;
+      }
+
+      .context {
+        --accent: #2481d9;
+        --soft: #eaf4ff;
+      }
+
+      .intent {
+        --accent: #33a98b;
+        --soft: #e8f8f2;
+      }
+
+      .constraint {
+        --accent: #db8e29;
+        --soft: #fff4e2;
+      }
+
+      .output {
+        --accent: #7565d2;
+        --soft: #f0edff;
+      }
+
+      .evaluation {
+        --accent: #cc5d70;
+        --soft: #ffedf0;
+      }
+
+      .handoff-panel {
+        margin-top: 46px;
+        padding: 30px;
+        color: white;
+        border-radius: 22px;
+        background: linear-gradient(110deg, #173567, #255cae);
+        box-shadow: var(--shadow);
+      }
+
+      .handoff-panel h2 {
+        margin-bottom: 8px;
+        font-size: 25px;
+        letter-spacing: -0.04em;
+      }
+
+      .handoff-panel > p {
+        max-width: 800px;
+        margin-bottom: 23px;
+        color: rgba(255, 255, 255, 0.76);
+        font-size: 14px;
+      }
+
+      .handoff-flow {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr) 40px minmax(0, 1fr);
+        align-items: stretch;
+      }
+
+      .handoff-box {
+        min-height: 152px;
+        padding: 19px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 16px;
+        background: rgba(8, 28, 70, 0.28);
+      }
+
+      .handoff-box small {
+        display: block;
+        margin-bottom: 7px;
+        color: #a8d1ff;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+      }
+
+      .handoff-box b {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 17px;
+        letter-spacing: -0.03em;
+      }
+
+      .handoff-box span {
+        color: rgba(255, 255, 255, 0.74);
+        font-size: 13px;
+      }
+
+      .handoff-arrow {
+        display: grid;
+        place-items: center;
+        color: #a8d1ff;
+        font-size: 24px;
+        font-weight: 800;
+      }
+
+      .matrix {
+        margin-top: 46px;
+      }
+
+      .matrix-grid {
+        display: grid;
+        grid-template-columns: 1.1fr repeat(3, 1fr);
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--surface);
+      }
+
+      .matrix-grid > div {
+        min-height: 58px;
+        padding: 15px;
+        border-right: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        font-size: 13px;
+      }
+
+      .matrix-grid > div:nth-child(4n) {
+        border-right: 0;
+      }
+
+      .matrix-grid > div:nth-last-child(-n + 4) {
+        border-bottom: 0;
+      }
+
+      .matrix-grid .head {
+        color: var(--muted);
+        background: #f8faff;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .matrix-grid .role {
+        font-weight: 800;
+      }
+
+      .matrix-grid .stage-cell {
+        color: var(--blue);
+        font-weight: 700;
+      }
+
+      .matrix-grid .receive {
+        color: var(--muted);
+      }
+
+      .closing {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        margin-top: 46px;
+        padding: 22px 25px;
+        border: 1px solid #ccd9ee;
+        border-radius: 18px;
+        background: #edf4ff;
+      }
+
+      .closing b {
+        font-size: 16px;
+        letter-spacing: -0.025em;
+      }
+
+      .closing p {
+        margin: 4px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .closing a {
+        flex: 0 0 auto;
+        padding: 10px 14px;
+        color: white;
+        border-radius: 10px;
+        background: var(--blue);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      @media (max-width: 920px) {
+        .hero,
+        .harness,
+        .workflow-wrap {
+          grid-template-columns: 1fr;
+        }
+
+        .control-card {
+          min-height: 250px;
+        }
+
+        .loop-grid {
+          grid-template-columns: repeat(5, 1fr);
+        }
+      }
+
+      @media (max-width: 700px) {
+        .page {
+          width: min(100% - 24px, 1240px);
+          padding-top: 18px;
+        }
+
+        .hero {
+          padding: 28px 23px;
+          border-radius: 19px;
+        }
+
+        .intro,
+        .stages {
+          grid-template-columns: 1fr;
+        }
+
+        .section-head {
+          display: block;
+        }
+
+        .section-head p {
+          margin-top: 7px;
+          text-align: left;
+        }
+
+        .loop-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .loop-step {
+          min-height: 0;
+        }
+
+        .loop-step:not(:last-child)::after {
+          top: auto;
+          right: auto;
+          bottom: -24px;
+          left: 50%;
+          transform: rotate(90deg);
+        }
+
+        .handoff-flow {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .handoff-arrow {
+          height: 22px;
+          transform: rotate(90deg);
+        }
+
+        .matrix-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .matrix-grid > div,
+        .matrix-grid > div:nth-child(4n),
+        .matrix-grid > div:nth-last-child(-n + 4) {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .matrix-grid > div:last-child {
+          border-bottom: 0;
+        }
+
+        .matrix-grid .head {
+          display: none;
+        }
+
+        .matrix-grid .role {
+          padding-bottom: 4px;
+          background: #f8faff;
+        }
+
+        .closing {
+          display: block;
+        }
+
+        .closing a {
+          display: inline-block;
+          margin-top: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Shared practice repository</p>
+          <h1>강의의 이해를<br />GitHub의 실행으로,<br />현업의 재사용으로</h1>
+          <p>
+            이 저장소는 AI가 만든 화면을 보관하는 곳이 아니라, 근거·결정·구조·디자인·개발 전달을
+            연결해 다음 담당자가 바로 시작할 수 있게 만드는 공동 작업 하네스입니다.
+          </p>
+        </div>
+        <div class="hero-route" aria-label="교육에서 현업으로 이어지는 경로">
+          <span><strong>1</strong> 강의 Vault · 이해와 예시</span>
+          <span><strong>2</strong> GitHub · 협업과 검토</span>
+          <span><strong>3</strong> 현업 · 재사용과 확장</span>
+        </div>
+      </header>
+
+      <section class="intro" aria-label="핵심 원칙">
+        <article class="intro-card">
+          <b>01 / STAGE</b>
+          <h2>폴더는 역할이 아니라 성숙도</h2>
+          <p>수강생 한 명은 순차로 모두 경험하고, 현업에서는 같은 경계를 기준으로 역할을 나눕니다.</p>
+        </article>
+        <article class="intro-card">
+          <b>02 / BASELINE</b>
+          <h2>다음 단계는 승인된 입력부터</h2>
+          <p>초안은 탐색용입니다. accepted baseline만 다음 담당자의 시작점이 됩니다.</p>
+        </article>
+        <article class="intro-card">
+          <b>03 / AI NATIVE</b>
+          <h2>AI는 생성자, 사람은 결정자</h2>
+          <p>AI의 기여·가정·제약을 남기고, 사람의 검토를 거쳐야 기준 산출물이 됩니다.</p>
+        </article>
+      </section>
+
+      <section aria-labelledby="workflow-title">
+        <div class="section-head">
+          <h2 id="workflow-title">순차적 산출물 흐름</h2>
+          <p>각 카드는 해당 폴더의 안내 문서로 연결됩니다. 화살표는 파일 이동이 아니라 다음 역할의 인수인계입니다.</p>
+        </div>
+
+        <div class="workflow-wrap">
+          <a class="control-card" href="../00. 통합 R&R 및 전체 작업 흐름.md">
+            <div>
+              <small>00 / CONTROL PLANE</small>
+              <h3>운영·공통 기준</h3>
+              <p>모든 단계가 공유하는 Context, Guardrail, 템플릿, Quality Gate를 관리합니다.</p>
+              <ul class="control-list">
+                <li>통합 R&amp;R · 전체 흐름</li>
+                <li>하네스 운영 규칙</li>
+                <li>산출물 계약 · 품질 게이트</li>
+                <li>AI 협업 · 변경 관리</li>
+              </ul>
+            </div>
+            <span class="open-link">운영 기준 열기 →</span>
+          </a>
+
+          <div class="stages">
+            <a class="stage research" href="../../01.%20요구사항%20수집·리서치/README.md">
+              <span class="num">01 / RESEARCH</span>
+              <h3>요구사항 수집·리서치</h3>
+              <p>근거, 관찰, 가설, 질문을 분리해 문제와 요구사항 후보를 만듭니다.</p>
+              <span class="handoff"><span>→</span> 증거·가설·문제 정의</span>
+            </a>
+            <a class="stage prd" href="../../02.%20PRD/README.md">
+              <span class="num">02 / PRD</span>
+              <h3>제품 요구사항으로 결정</h3>
+              <p>누구의 어떤 문제를 어디까지 풀지, 수용 기준은 무엇인지 합의합니다.</p>
+              <span class="handoff"><span>→</span> 목표·범위·수용 기준</span>
+            </a>
+            <a class="stage ia" href="../../03.%20IA/README.md">
+              <span class="num">03 / IA</span>
+              <h3>정보 구조와 과업 흐름</h3>
+              <p>메뉴, 콘텐츠, 흐름, 권한, 예외를 서비스 구조로 번역합니다.</p>
+              <span class="handoff"><span>→</span> 화면·흐름·상태 모델</span>
+            </a>
+            <a class="stage wireframe" href="../../04.%20Wireframe/README.md">
+              <span class="num">04 / WIREFRAME</span>
+              <h3>화면 구조와 행동</h3>
+              <p>정보 위계, CTA, 화면 상태를 저충실도 구조로 검증합니다.</p>
+              <span class="handoff"><span>→</span> 레이아웃·행동 annotation</span>
+            </a>
+            <a class="stage hifi" href="../../05.%20Hi-Fi%20Design%20%28Figma%20Make%2C%20Claude%20Design%29/README.md">
+              <span class="num">05 / HI-FI</span>
+              <h3>시각·컴포넌트 기준</h3>
+              <p>Figma Make 또는 Claude Design 결과 중 하나를 canonical source로 선언합니다.</p>
+              <span class="handoff"><span>→</span> design source·state·asset</span>
+            </a>
+            <a class="stage handoff-stage" href="../../06.%20개발%20전달·퍼블리싱/README.md">
+              <span class="num">06 / HANDOFF</span>
+              <h3>개발 전달·퍼블리싱</h3>
+              <p>원본을 복사하지 않고 링크·상태·질의로 구현자가 시작할 기준을 만듭니다.</p>
+              <span class="handoff"><span>→</span> 구현 저장소·팀으로 연결</span>
+            </a>
+          </div>
+        </div>
+        <p class="caption">
+          <strong>하나의 사례, 하나의 단계, 하나의 canonical.</strong> 이전 버전은 Git 이력으로 추적하고, 기준 변경은 CR(Change Request)로 다시 검토합니다.
+        </p>
+      </section>
+
+      <section class="harness" aria-labelledby="harness-title">
+        <div class="harness-copy">
+          <p class="eyebrow">Harness engineering</p>
+          <h2 id="harness-title">AI에게 자유를 주는 대신, 작업 환경을 고정합니다</h2>
+          <p>
+            하네스는 프롬프트 문장 하나가 아닙니다. AI와 사람이 같은 문제를 풀고, 결과를 검토 가능한
+            형태로 남기도록 입력·제약·출력·평가를 정렬하는 운영 방식입니다.
+          </p>
+          <ul>
+            <li><b>입력</b><span>직전 accepted baseline과 그 근거를 명시</span></li>
+            <li><b>기록</b><span>FACT · ASSUMPTION · DECISION · OPEN을 분리</span></li>
+            <li><b>검토</b><span>다음 단계 수신자가 “이것으로 시작 가능한가”를 확인</span></li>
+            <li><b>변경</b><span>상위 변경은 CR로 영향 범위를 기록하고 재검토</span></li>
+          </ul>
+        </div>
+        <div class="harness-loop" aria-label="AI 작업 하네스 5단계">
+          <div class="loop-grid">
+            <div class="loop-step context">
+              <b>CONTEXT</b>
+              <span>무엇을 알고 있는가</span>
+              <small>근거, baseline, 사용자, 업무 맥락</small>
+            </div>
+            <div class="loop-step intent">
+              <b>INTENT</b>
+              <span>무엇을 결정할 것인가</span>
+              <small>목적, 문제, 범위, 다음 소비자</small>
+            </div>
+            <div class="loop-step constraint">
+              <b>CONSTRAINT</b>
+              <span>무엇을 넘지 않는가</span>
+              <small>보안, 접근성, 정책, 비범위</small>
+            </div>
+            <div class="loop-step output">
+              <b>OUTPUT</b>
+              <span>어떤 형식으로 남길 것인가</span>
+              <small>문서, manifest, 표, 링크, 상태</small>
+            </div>
+            <div class="loop-step evaluation">
+              <b>EVALUATION</b>
+              <span>무엇으로 통과를 판단할까</span>
+              <small>Quality Gate, reviewer, acceptance</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="handoff-panel" aria-labelledby="handoff-title">
+        <h2 id="handoff-title">Hi-Fi는 한 번만 만들고, 개발에는 얇게 연결합니다</h2>
+        <p>
+          06은 디자인의 복제 보관함이 아닙니다. 기준 원본은 05에 유지하고, 개발 담당자는 manifest를 통해
+          버전·상태·에셋·반응형·미해결 질문을 확인합니다.
+        </p>
+        <div class="handoff-flow">
+          <div class="handoff-box">
+            <small>05 / SOURCE OF TRUTH</small>
+            <b>Figma Make 또는 Claude Design</b>
+            <span>URL · page/frame ID · frozen version · component · state</span>
+          </div>
+          <div class="handoff-arrow" aria-hidden="true">→</div>
+          <div class="handoff-box">
+            <small>06 / THIN HANDOFF</small>
+            <b>Handoff Manifest</b>
+            <span>화면 · breakpoint · asset · content · interaction · OPEN</span>
+          </div>
+          <div class="handoff-arrow" aria-hidden="true">→</div>
+          <div class="handoff-box">
+            <small>IMPLEMENTATION</small>
+            <b>별도 개발 저장소·팀</b>
+            <span>구현 PR · 테스트 · 배포는 개발 저장소에서 관리</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="matrix" aria-labelledby="roles-title">
+        <div class="section-head">
+          <h2 id="roles-title">R&amp;R은 역할의 벽이 아니라 인수인계의 언어입니다</h2>
+          <p>교육에서는 한 사람이 모두 수행할 수 있고, 현업에서는 각 책임을 역할별로 나눌 수 있습니다.</p>
+        </div>
+        <div class="matrix-grid" role="table" aria-label="핵심 역할과 인수인계">
+          <div class="head" role="columnheader">책임 기능</div>
+          <div class="head" role="columnheader">주요 단계</div>
+          <div class="head" role="columnheader">결과물 책임</div>
+          <div class="head" role="columnheader">다음 수신자</div>
+
+          <div class="role" role="cell">Research / Evidence Owner</div>
+          <div class="stage-cell" role="cell">01</div>
+          <div role="cell">근거, 가설, 문제 후보</div>
+          <div class="receive" role="cell">Product Decision Owner</div>
+
+          <div class="role" role="cell">Product Decision Owner</div>
+          <div class="stage-cell" role="cell">02</div>
+          <div role="cell">목표, 범위, 요구사항, 수용 기준</div>
+          <div class="receive" role="cell">UX / IA Owner</div>
+
+          <div class="role" role="cell">UX / IA Owner</div>
+          <div class="stage-cell" role="cell">03</div>
+          <div role="cell">IA, 흐름, 상태·예외</div>
+          <div class="receive" role="cell">UX / UI Owner</div>
+
+          <div class="role" role="cell">UX / UI Owner · AI Design Operator</div>
+          <div class="stage-cell" role="cell">04–05</div>
+          <div role="cell">화면 구조, canonical design, asset</div>
+          <div class="receive" role="cell">Publishing / Frontend Receiver</div>
+
+          <div class="role" role="cell">Publishing / Frontend Receiver</div>
+          <div class="stage-cell" role="cell">06</div>
+          <div role="cell">수신 확인, blocker, 구현 연결</div>
+          <div class="receive" role="cell">개발 저장소·팀</div>
+        </div>
+      </section>
+
+      <footer class="closing">
+        <div>
+          <b>실습은 문서 작성이 아니라, 다음 사람이 바로 시작할 수 있는 기준을 만드는 일입니다.</b>
+          <p>각 단계의 자세한 입력·출력·Quality Gate는 공통 운영 문서와 폴더별 README에서 확인합니다.</p>
+        </div>
+        <a href="../00. 통합 R&R 및 전체 작업 흐름.md">통합 R&amp;R 열기 →</a>
+      </footer>
+    </main>
+  </body>
+</html>

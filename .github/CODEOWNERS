@@ -1,0 +1,12 @@
+# 이 파일은 역할 경계를 보여 주는 시작 템플릿입니다.
+# GitHub 사용자명 또는 Organization 팀이 정해진 뒤, 주석을 제거하고
+# <github-handle>을 실제 계정으로 교체하세요.
+#
+# /00. 운영·공통 기준/ @<repository-steward>
+# /.github/ @<repository-steward>
+# /01. 요구사항 수집·리서치/ @<research-or-product-owner>
+# /02. PRD/ @<product-owner>
+# /03. IA/ @<ux-ia-owner>
+# /04. Wireframe/ @<ux-ui-owner>
+# /05. Hi-Fi Design (Figma Make, Claude Design)/ @<ux-ui-owner>
+# /06. 개발 전달·퍼블리싱/ @<publishing-or-frontend-receiver>
