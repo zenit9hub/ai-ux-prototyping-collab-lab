@@ -1,3 +1,4 @@
+(() => {
 const { deviceGroups, devices, initialAlerts, initialCampaigns, sites } = window.AIOTPrototypeData;
 
 const shell = document.getElementById("app-shell");
@@ -954,3 +955,4 @@ document.addEventListener("keydown", (event) => {
 });
 
 render();
+})();

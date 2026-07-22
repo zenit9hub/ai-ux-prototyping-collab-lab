@@ -1,3 +1,4 @@
+(() => {
 const sites = ["North Plant", "South Terminal", "East Facility", "West Depot"];
 
 const deviceGroups = ["Cold Chain", "Utilities", "Packaging", "Energy"];
@@ -310,3 +311,4 @@ window.AIOTPrototypeData = Object.freeze({
   initialCampaigns,
   sites,
 });
+})();
