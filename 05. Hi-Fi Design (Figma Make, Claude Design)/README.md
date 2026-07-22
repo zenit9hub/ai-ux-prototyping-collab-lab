@@ -21,6 +21,7 @@
 - token, component, content, asset, interaction의 구현 전달 기준
 - AI가 생성한 비교안·선정 이유·사람 검토 범위를 남긴 작업 기록
 - 필요할 때 회의·리뷰용 HTML showcase 또는 export
+- 구현 수신자가 상호작용을 확인해야 할 때, 06 handoff package로 넘길 동결된 단일 standalone HTML 참고본
 
 시작할 때는 [02. Hi-Fi Canonical Manifest 템플릿](<../00. 운영·공통 기준/templates/02. Hi-Fi Canonical Manifest 템플릿.md>)과 [05. AI 작업 기록 템플릿](<../00. 운영·공통 기준/templates/05. AI 작업 기록 템플릿.md>)을 복사해 사례 ID를 부여한다.
 
@@ -42,7 +43,7 @@
 - [ ] 접근성·표현 제약·미해결 질문이 기록되었다.
 - [ ] Publishing / Frontend Receiver가 이 기준으로 구현 검토를 시작할 수 있다.
 
-통과하면 canonical manifest를 accepted로 바꾸고, 06. 개발 전달·퍼블리싱에는 복사본이 아닌 기준 링크와 전달 정보만 넘긴다.
+통과하면 canonical manifest를 accepted로 바꾼다. 06. 개발 전달·퍼블리싱에는 기준 링크와 전달 정보를 넘기며, 구현 수신에 상호작용 참고가 필요한 경우에 한해 그 기준을 가리키는 동결된 단일 standalone HTML을 `reference-only`로 함께 패키징할 수 있다. 이 파일은 canonical source나 구현 원본으로 승격되지 않는다.
 
 ## 다음 단계 전달 패키지
 

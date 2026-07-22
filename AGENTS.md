@@ -7,7 +7,7 @@
 - 요청받은 사례와 현재 단계 폴더만 우선 수정한다.
 - `00. 운영·공통 기준`과 `.github`은 Repository Steward 또는 명시적 요청이 있을 때만 바꾼다.
 - 직전 단계의 accepted baseline은 원본으로 보존한다. 수정이 필요하면 변경 요청(`CR-###`)을 기록하고, 영향을 받는 하위 단계를 알린다.
-- Hi-Fi 기준 원본은 `05. Hi-Fi Design (Figma Make, Claude Design)`의 canonical manifest다. `06`에는 복사본을 만들지 않는다.
+- Hi-Fi 기준 원본은 `05. Hi-Fi Design (Figma Make, Claude Design)`의 canonical manifest다. `06`에는 canonical 복사본을 만들지 않는다. 다만 구현 수신에 상호작용 참고가 필요하면, manifest에 기준·동결일·도구·상태를 기록한 **단일 standalone HTML**을 `reference-only`로 패키징할 수 있다. 이는 구현 원본이 아니다.
 
 - 07. 배포·검증 (GitHub Pages)의 site는 검증용 정적 source다. 실제 운영 데이터·비밀값·실장비 제어 API를 추가하지 않는다.
 
@@ -55,7 +55,7 @@ ai_contribution: 도구·프롬프트 버전·사람 검토 범위
 - 결과를 만들기 전, 누락된 입력·제약·검증 기준을 밝힌다.
 - 새 구조·화면·정책을 발명해야 할 때는 `ASSUMPTION` 또는 `OPEN`으로 남긴다.
 - 보안 정보, 개인정보, 고객 데이터, 비밀 키를 저장소에 쓰지 않는다.
-- Figma/Claude Design은 URL, 페이지/프레임 ID, 동결일, 버전으로 manifest에 기록한다. 대형 원본 파일·내보낸 비밀 자산을 무단으로 추가하지 않는다.
+- Figma/Claude Design은 URL, 페이지/프레임 ID, 동결일, 버전으로 manifest에 기록한다. 대형 원본 파일·내보낸 비밀 자산을 무단으로 추가하지 않는다. 단일 standalone HTML은 5 MB 이하이고 비밀값·개인정보·운영 API가 없으며, `reference-only` 용도와 기준 manifest가 명시된 경우에만 06 handoff package에 포함할 수 있다.
 
 ## 6. 완료 전 검수
 
@@ -66,7 +66,7 @@ ai_contribution: 도구·프롬프트 버전·사람 검토 범위
 
 ## 7. GitHub 작업 방식
 
-- `main`에는 accepted baseline만 반영한다.
+- `main`에는 accepted baseline만 반영한다. 단, 교육·전달을 위한 `reference_only: true` 동결 참고본과 그 manifest는 포함할 수 있으나, 다음 단계의 accepted 입력으로 취급하지 않는다.
 - 작업 브랜치는 `work/<case-id>/<NN>-<stage-name>`을 사용한다.
 - Pull Request에는 입력 baseline, 변경 목적, 사실/가정/결정/미확정, 다음 단계 영향, AI 사용 범위, 품질 게이트 결과를 적는다.
 - 자동 검증은 구조·링크·메타데이터 같은 기계적 조건만 다룬다. UX 품질·사업 적합성·정책 승인은 사람이 담당한다.
