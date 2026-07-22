@@ -15,12 +15,15 @@
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <div class="app-shell" id="app-shell">
       <aside class="sidebar" id="sidebar" aria-label="Primary navigation"></aside>
-      <main class="main-content" id="main-content" tabindex="-1"></main>
+      <main class="main-content" id="main-content" tabindex="-1">
+        <p class="app-loading" aria-live="polite">Preparing the AIoT operations dashboard…</p>
+      </main>
     </div>
     <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
     <noscript>
       <p class="noscript-message">This prototype needs JavaScript to render the interactive demo.</p>
     </noscript>
-    <script type="module" src="./assets/js/app.js"></script>
+    <script defer src="./assets/js/data.js?v=20260722-2"></script>
+    <script defer src="./assets/js/app.js?v=20260722-2"></script>
   </body>
 </html>

@@ -1,11 +1,4 @@
-import {
-  deviceGroups,
-  devices,
-  firmwareVersions,
-  initialAlerts,
-  initialCampaigns,
-  sites,
-} from "./data.js";
+const { deviceGroups, devices, initialAlerts, initialCampaigns, sites } = window.AIOTPrototypeData;
 
 const shell = document.getElementById("app-shell");
 const sidebar = document.getElementById("sidebar");
@@ -727,7 +720,7 @@ function renderAlertDrawer(alert) {
     '<section class="drawer-section"><h3>Response action</h3><p>These actions update only the local review state and make no external request.</p>' +
     actions +
     "</section>" +
-    '<section class="drawer-section"><h3>Review reminder</h3><p>When a real product decision changes, create a tracked Issue or CR before revising upstream requirements, flow, or visual design.</p></section></div></aside>"
+    '<section class="drawer-section"><h3>Review reminder</h3><p>When a real product decision changes, create a tracked Issue or CR before revising upstream requirements, flow, or visual design.</p></section></div></aside>'
   );
 }
 

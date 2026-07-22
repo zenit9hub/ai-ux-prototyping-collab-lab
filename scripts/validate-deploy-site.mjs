@@ -33,6 +33,7 @@ if (errors.length === 0) {
   const requiredIndexMarkers = [
     "<!doctype html>",
     "./assets/css/styles.css",
+    "./assets/js/data.js",
     "./assets/js/app.js",
     'id="main-content"',
   ];
@@ -67,8 +68,16 @@ if (errors.length === 0) {
     }
   }
 
-  if (!data.includes("export const devices") || !data.includes("export const initialAlerts")) {
-    errors.push("mock data module의 필수 export가 없습니다.");
+  if (!data.includes("window.AIOTPrototypeData") || !data.includes("const devices") || !data.includes("const initialAlerts")) {
+    errors.push("mock data script의 필수 전역 데이터 구조가 없습니다.");
+  }
+
+  if (!app.includes("window.AIOTPrototypeData")) {
+    errors.push("app.js가 mock data 전역 구조를 참조하지 않습니다.");
+  }
+
+  if (index.indexOf("./assets/js/data.js") > index.indexOf("./assets/js/app.js")) {
+    errors.push("data.js가 app.js보다 먼저 로드되지 않습니다.");
   }
 }
 

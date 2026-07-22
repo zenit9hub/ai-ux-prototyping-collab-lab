@@ -1125,6 +1125,12 @@ tbody tr:hover {
   background: var(--red);
 }
 
+.app-loading {
+  margin: 28px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
 @media (max-width: 1120px) {
   .filter-panel {
     grid-template-columns: repeat(2, minmax(0, 1fr));

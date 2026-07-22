@@ -1,10 +1,10 @@
-export const sites = ["North Plant", "South Terminal", "East Facility", "West Depot"];
+const sites = ["North Plant", "South Terminal", "East Facility", "West Depot"];
 
-export const deviceGroups = ["Cold Chain", "Utilities", "Packaging", "Energy"];
+const deviceGroups = ["Cold Chain", "Utilities", "Packaging", "Energy"];
 
-export const firmwareVersions = ["v3.2.1", "v3.1.8", "v3.1.4", "v3.0.9"];
+const firmwareVersions = ["v3.2.1", "v3.1.8", "v3.1.4", "v3.0.9"];
 
-export const devices = [
+const devices = [
   {
     id: "DVC-1001",
     name: "Compressor A-14",
@@ -231,7 +231,7 @@ export const devices = [
   },
 ];
 
-export const initialAlerts = [
+const initialAlerts = [
   {
     id: "ALT-9204",
     severity: "critical",
@@ -279,7 +279,7 @@ export const initialAlerts = [
   },
 ];
 
-export const initialCampaigns = [
+const initialCampaigns = [
   {
     id: "CMP-042",
     name: "July stability update",
@@ -301,3 +301,12 @@ export const initialCampaigns = [
     completed: 2,
   },
 ];
+
+window.AIOTPrototypeData = Object.freeze({
+  deviceGroups,
+  devices,
+  firmwareVersions,
+  initialAlerts,
+  initialCampaigns,
+  sites,
+});
