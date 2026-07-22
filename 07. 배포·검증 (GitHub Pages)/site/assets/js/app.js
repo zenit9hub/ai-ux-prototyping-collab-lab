@@ -136,6 +136,8 @@ function filteredAlerts() {
 }
 
 function renderSidebar() {
+  const sidebarToggleLabel = state.sidebarCollapsed ? "Expand navigation" : "Collapse navigation";
+  const sidebarToggleIcon = state.sidebarCollapsed ? "⇥" : "⇤";
   const navigationMarkup = navigation
     .map((item) => {
       const active = state.screen === item.id ? " is-active" : "";
@@ -147,6 +149,11 @@ function renderSidebar() {
         item.id +
         '"' +
         current +
+        ' aria-label="' +
+        item.label +
+        '" title="' +
+        item.label +
+        '"' +
         ">" +
         '<span class="nav-icon" aria-hidden="true">' +
         item.icon +
@@ -169,7 +176,15 @@ function renderSidebar() {
     "</nav>" +
     '<div class="sidebar-footer">' +
     "<p>Prototype workspace<br />Mock data only · July 2026</p>" +
-    '<button class="sidebar-toggle" type="button" data-action="toggle-sidebar"><span aria-hidden="true">⇤</span><span>Collapse navigation</span></button>' +
+    '<button class="sidebar-toggle" type="button" data-action="toggle-sidebar" aria-label="' +
+    sidebarToggleLabel +
+    '" title="' +
+    sidebarToggleLabel +
+    '"><span class="sidebar-toggle-icon" aria-hidden="true">' +
+    sidebarToggleIcon +
+    '</span><span class="sidebar-toggle-label">' +
+    sidebarToggleLabel +
+    "</span></button>" +
     "</div>"
   );
 }

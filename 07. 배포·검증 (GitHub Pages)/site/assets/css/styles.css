@@ -228,8 +228,8 @@ select:focus-visible {
 .app-shell.is-sidebar-collapsed .brand-copy,
 .app-shell.is-sidebar-collapsed .nav-label,
 .app-shell.is-sidebar-collapsed .sidebar-footer p,
-.app-shell.is-sidebar-collapsed .sidebar-toggle span {
-  visibility: hidden;
+.app-shell.is-sidebar-collapsed .sidebar-toggle-label {
+  display: none;
 }
 
 .app-shell.is-sidebar-collapsed .brand,
@@ -253,6 +253,14 @@ select:focus-visible {
 .app-shell.is-sidebar-collapsed .sidebar-footer {
   padding-right: 0;
   padding-left: 0;
+  justify-items: center;
+}
+
+.app-shell.is-sidebar-collapsed .sidebar-toggle {
+  width: 36px;
+  justify-content: center;
+  padding-right: 7px;
+  padding-left: 7px;
 }
 
 .main-content {
@@ -1171,11 +1179,17 @@ tbody tr:hover {
     transform: translateX(0);
   }
 
-  .app-shell.is-sidebar-collapsed .brand-copy,
+  .app-shell.is-sidebar-collapsed .brand-copy {
+    display: grid;
+  }
+
   .app-shell.is-sidebar-collapsed .nav-label,
-  .app-shell.is-sidebar-collapsed .sidebar-footer p,
-  .app-shell.is-sidebar-collapsed .sidebar-toggle span {
-    visibility: visible;
+  .app-shell.is-sidebar-collapsed .sidebar-toggle-label {
+    display: inline;
+  }
+
+  .app-shell.is-sidebar-collapsed .sidebar-footer p {
+    display: block;
   }
 
   .app-shell.is-sidebar-collapsed .brand,
