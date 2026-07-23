@@ -8,6 +8,7 @@
 - AI 에이전트 작업 규칙: [`AGENTS.md`](AGENTS.md)
 - 단계별 품질 게이트: [`00. 운영·공통 기준/02. 산출물 계약·품질 게이트.md`](<00. 운영·공통 기준/02. 산출물 계약·품질 게이트.md>)
 - 시각 흐름 안내: [`00. 운영·공통 기준/visual/00. AI Native Workflow Map.html`](<00. 운영·공통 기준/visual/00. AI Native Workflow Map.html>)
+- 공개 웹서비스를 근거 기반으로 해석하는 보조 학습 영역: [`90. 웹서비스 리버스엔지니어링 레퍼런스`](<90. 웹서비스 리버스엔지니어링 레퍼런스/README.md>) — `reference-only`이며 `01~07`의 accepted baseline은 아니다.
 
 ## 작업 흐름
 
